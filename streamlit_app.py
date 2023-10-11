@@ -32,7 +32,7 @@ excel_file_url = 'https://raw.githubusercontent.com/martinrysanek/sl_experiment/
 response = requests.get(excel_file_url)
 
 # Check if the file exists in the GitHub repository
-if response.status_code == 200 and os.path.isfile(io.BytesIO(response.content)):
+if response.status_code == 200
     # Read the Excel file from the bytes object using BytesIO and pandas
     data = pd.read_excel(io.BytesIO(response.content))
 else:
