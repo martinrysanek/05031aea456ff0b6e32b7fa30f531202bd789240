@@ -1,6 +1,7 @@
 ﻿import streamlit as st
 import requests
 import pandas as pd
+import io
 
 # Configure Streamlit page layout for a wide style
 st.set_page_config(
