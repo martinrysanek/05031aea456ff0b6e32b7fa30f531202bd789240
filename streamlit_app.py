@@ -29,7 +29,7 @@ loading_text = st.text('Loading data...')
 # URL of the raw Excel file in your GitHub repository
 excel_file_url = 'https://raw.githubusercontent.com/martinrysanek/sl_experiment/main/slevy.xlsx'
 # Retrieve the Excel file data from GitHub using requests
-response = requests.get(github_url)
+response = requests.get(excel_file_url)
 
 # Check if the file exists in the GitHub repository
 if response.status_code == 200 and os.path.isfile(io.BytesIO(response.content)):
