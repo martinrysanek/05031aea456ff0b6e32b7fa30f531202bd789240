@@ -25,19 +25,20 @@ section[data-testid="stSidebar"] {
 # Display the dataframe with the custom CSS style
 st.markdown(f'<style>{css}</style>', unsafe_allow_html=True)
 
+loading_text = st.text('Loading data...')
 # URL of the raw Excel file in your GitHub repository
 excel_file_url = 'https://raw.githubusercontent.com/martinrysanek/sl_experiment/main/slevy.xlsx'
-# Send an HTTP GET request to the URL to download the file
-response = requests.get(excel_file_url)
+# Retrieve the Excel file data from GitHub using requests
+response = requests.get(github_url)
 
-loading_text = st.text('Loading data...')
-# Check if the request was successful (status code 200)
-if response.status_code == 200:
-    # Create a Pandas DataFrame from the Excel file content
-    data = pd.read_excel(response.content)
+# Check if the file exists in the GitHub repository
+if response.status_code == 200 and os.path.isfile(io.BytesIO(response.content)):
+    # Read the Excel file from the bytes object using BytesIO and pandas
+    data = pd.read_excel(io.BytesIO(response.content))
 else:
     st.error(f"Failed to download file. Status code: {response.status_code}")
     exit(1)
+
 loading_text.empty()
 
 NADPISY = False
