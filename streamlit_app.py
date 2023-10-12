@@ -75,9 +75,6 @@ filtered_data = filtered_data[filtered_data['Druh'].isin(L3_selected)].sort_valu
 selected_columns = ['Druh', 'Název', 'Obchod', 'Cena', 'Cena za', 'Jednotková cena', 'Platnost']
 st.dataframe(filtered_data[selected_columns], hide_index=True, use_container_width=True, height=770)
 
-def my_callback():
-    st.write('You clicked the button!')
-
 with st.sidebar:
     st.divider() 
     st.write('Postup: *Po vyběru hlavní a vedlejší kategorie, jsou vždy vybrány všechny druhy, některé můžete odstranit nebo všechny najednou smazat a přidat vlastní. Zboží je tříděno podle ceny za jednotku, aby bylo zřejmé, kde se dá pořídit nejlevněji.*')
