@@ -19,7 +19,7 @@ data-testid="ScrollToBottomContainer"] {overflow: hidden;}
             #     width: 375px;
             # }}
 section[data-testid="stSidebar"] {
-    width: 360px !important; # Set the width to your desired value
+    width: 400px !important; # Set the width to your desired value
 }
 """
 
@@ -43,7 +43,10 @@ else:
 loading_text.empty()
 
 NADPISY = False
+BOTTOM = True
 RADKY = True
+
+
 
 # data.sort_values(by='Unit_num', ascending=True, inplace = True)
 
@@ -60,7 +63,6 @@ if NADPISY:
 L2_selected = st.sidebar.selectbox('Vyber vedlejší kategorii zboží', filtered_data['Podkategorie'].unique(), index=0)
 if RADKY:
     st.sidebar.write("&nbsp;")
-# filtered_data = data[(data['Kategorie'] == L1_selected) & (data['Podkategorie'] == L2_selected)].sort_values(by='Druh', ascending=True)
 filtered_data = filtered_data[filtered_data['Podkategorie'] == L2_selected].sort_values(by='Druh', ascending=True)
 
 if NADPISY:
@@ -76,6 +78,16 @@ filtered_data = filtered_data[filtered_data['Druh'].isin(L3_selected)].sort_valu
 selected_columns = ['Druh', 'Název', 'Obchod', 'Cena', 'Cena za', 'Jednotková cena', 'Platnost']
 st.dataframe(filtered_data[selected_columns], hide_index=True, use_container_width=True, height=770)
 
+with st.sidebar.footer:
+    st.write('Postup: *postupně vyber hlavní a vedlejší kategorii zboží. Následně vyber druh nebo více druhů zboží. Zboží je tříděno podle ceny za jednotku, aby bylo zřejmé, kde je možné pořídit nejlevněji. Jedním šedivím křížkem lze najednou odstranit všechny druhy a vybrat si ten nebo ty, které chcete porovnat.*')
+    st.write()
+    st.write('Napište nám, pokud třeba chce porovnávat další zboží, či jej umístit jinak podle druhů.')
+    email = st.text_input('Email')
+    message = st.text_area('Message')
+    st.button('Click me', on_click=my_callback) 
+    
+def my_callback():
+    st.write('You clicked the button!')
 
 
 
