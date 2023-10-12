@@ -83,7 +83,7 @@ with st.sidebar:
     st.write()
     st.write()
     st.write('Postup: *Po vyběru hlavní a vedlejší kategorie, jsou vždy vybrány všechny druhy, některé můžete odstranit nebo všechny najednou smazat a přidat vlastní. Zboží je tříděno podle ceny za jednotku, aby bylo zřejmé, kde se dá pořídit nejlevněji.*')
-    st.write('*Děkuji za Vaše kometáře, návrhy dalšího zboží, jiné třídění, druhy, zkušenosti.*')
+    st.write('*Děkuji za Vaše kometáře a zkušenosti, návrhy dalšího zboží, jiné třídění či uspořádání druhů.*')
     email = st.text_input('E-mail')
     message = st.text_area('')
     st.button('Odešli', on_click=my_callback) 
