@@ -46,8 +46,6 @@ NADPISY = False
 BOTTOM = True
 RADKY = True
 
-
-
 # data.sort_values(by='Unit_num', ascending=True, inplace = True)
 
 if NADPISY:
@@ -78,13 +76,14 @@ filtered_data = filtered_data[filtered_data['Druh'].isin(L3_selected)].sort_valu
 selected_columns = ['Druh', 'Název', 'Obchod', 'Cena', 'Cena za', 'Jednotková cena', 'Platnost']
 st.dataframe(filtered_data[selected_columns], hide_index=True, use_container_width=True, height=770)
 
-with st.sidebar.footer:
-    st.write('Postup: *postupně vyber hlavní a vedlejší kategorii zboží. Následně vyber druh nebo více druhů zboží. Zboží je tříděno podle ceny za jednotku, aby bylo zřejmé, kde je možné pořídit nejlevněji. Jedním šedivím křížkem lze najednou odstranit všechny druhy a vybrat si ten nebo ty, které chcete porovnat.*')
-    st.write()
-    st.write('Napište nám, pokud třeba chce porovnávat další zboží, či jej umístit jinak podle druhů.')
-    email = st.text_input('Email')
-    message = st.text_area('Message')
-    st.button('Click me', on_click=my_callback) 
+st.write()
+st.write()
+st.write('Postup: *postupně vyber hlavní a vedlejší kategorii zboží. Následně vyber druh nebo více druhů zboží. Zboží je tříděno podle ceny za jednotku, aby bylo zřejmé, kde je možné pořídit nejlevněji. Jedním šedivím křížkem lze najednou odstranit všechny druhy a vybrat si ten nebo ty, které chcete porovnat.*')
+st.write()
+st.write('Napište nám, pokud třeba chce porovnávat další zboží, či jej umístit jinak podle druhů.')
+email = st.text_input('Email')
+message = st.text_area('Message')
+st.button('Click me', on_click=my_callback) 
     
 def my_callback():
     st.write('You clicked the button!')
