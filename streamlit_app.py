@@ -81,13 +81,7 @@ with st.sidebar:
     st.write('*Děkuji za Vaše kometáře a zkušenosti, návrhy dalšího zboží, jiné třídění či uspořádání druhů.*')
     email = st.text_input('E-mail')
     message = st.text_area('Text e-mailu')
-    st.button('Odešli', on_click=my_callback) 
-    
-def my_callback():
-    with st.sidebar:
-        success = st.success('E-Mail odeslán !', icon="✅")
-        time.sleep(0.3)
-        success.empty()
+    st.button('Odešli') 
     
 with st.sidebar:
     link = '[kupi.cz](https://www.kupi.cz/) &nbsp;[akcniceny.cz](https://www.akcniceny.cz/) &nbsp;[iletaky.cz](https://www.iletaky.cz/) &nbsp;[akcniletaky.com](https://www.akcniletaky.com/)'
