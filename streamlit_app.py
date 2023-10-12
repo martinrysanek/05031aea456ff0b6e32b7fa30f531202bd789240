@@ -85,7 +85,7 @@ with st.sidebar:
     st.write('Postup: *Po vyběru hlavní a vedlejší kategorie, jsou vždy vybrány všechny druhy, některé můžete odstranit nebo všechny najednou smazat a přidat vlastní. Zboží je tříděno podle ceny za jednotku, aby bylo zřejmé, kde se dá pořídit nejlevněji.*')
     st.write('*Děkuji za Vaše kometáře, návrhy dalšího zboží, jiné třídění, druhy, zkušenosti.*')
     email = st.text_input('E-mail')
-    message = st.text_area()
+    message = st.text_area('')
     st.button('Odešli', on_click=my_callback) 
     link = '[kupi.cz](https://www.kupi.cz/) &nbsp;[akcniceny.cz](https://www.akcniceny.cz/) &nbsp;[iletaky.cz](https://www.iletaky.cz/) &nbsp;[akcniletaky.com](https://www.akcniletaky.com/)'
     st.markdown(link, unsafe_allow_html=True)    
