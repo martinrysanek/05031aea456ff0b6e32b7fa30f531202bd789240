@@ -82,12 +82,11 @@ def my_callback():
 with st.sidebar:
     st.write()
     st.write()
-    st.write('Postup: *postupně vyber hlavní a vedlejší kategorii zboží. Následně vyber druh nebo více druhů zboží. Zboží je tříděno podle ceny za jednotku, aby bylo zřejmé, kde je možné pořídit nejlevněji. Jedním šedivím křížkem lze najednou odstranit všechny druhy a vybrat si ten nebo ty, které chcete porovnat.*')
-    st.write()
-    st.write('Napište nám, pokud třeba chce porovnávat další zboží, či jej umístit jinak podle druhů.')
+    st.write('Postup: *Po vyběru hlavní a vedlejší kategorie, jsou vždy vybrány všechny druhy, některé můžeš odstranit, všechny smazat a přidat je jednotlivě. Zboží je tříděno podle ceny za jednotku, aby bylo zřejmé, kde se pořídit nejlevněji.*')
+    st.write('Děkuji za Vaše kometáře (další zboží, jiné kategorie, druhy)')
     email = st.text_input('Email')
     message = st.text_area('Message')
-    st.button('Click me', on_click=my_callback) 
+    st.button('Odešli', on_click=my_callback) 
     
 
 
