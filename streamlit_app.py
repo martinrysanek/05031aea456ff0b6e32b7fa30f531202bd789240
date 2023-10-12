@@ -87,7 +87,8 @@ with st.sidebar:
     email = st.text_input('Email')
     message = st.text_area('Message')
     st.button('Odešli', on_click=my_callback) 
-    
+    link = '[kupi.cz](https://www.kupi.cz/) [akcniceny.cz](https://www.akcniceny.cz/)'
+    st.markdown(link, unsafe_allow_html=True)    
 
 
 
