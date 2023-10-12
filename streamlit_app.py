@@ -2,6 +2,7 @@
 import requests
 import pandas as pd
 import io
+import time
 
 # Configure Streamlit page layout for a wide style
 st.set_page_config(
@@ -47,10 +48,8 @@ BOTTOM = True
 RADKY = True
 
 # data.sort_values(by='Unit_num', ascending=True, inplace = True)
-
 if NADPISY:
     st.sidebar.header('Hlavní kategorie zboží')
-
 L1_selected = st.sidebar.selectbox('Vyber hlavní kategorii zboží', data['Kategorie'].unique())
 if RADKY:
     st.sidebar.write("&nbsp;")
@@ -80,13 +79,19 @@ def my_callback():
     st.write('You clicked the button!')
 
 with st.sidebar:
-    st.write()
-    st.write()
-    st.write('Postup: *Po vyběru hlavní a vedlejší kategorie, jsou vždy vybrány všechny druhy, některé můžete odstranit nebo všechny najednou smazat a přidat vlastní. Zboží je tříděno podle ceny za jednotku, aby bylo zřejmé, kde se dá pořídit nejlevněji.*')
-    st.write('*Děkuji za Vaše kometáře a zkušenosti, návrhy dalšího zboží, jiné třídění či uspořádání druhů.*')
+    st.divider() 
+    st.text('Postup: *Po vyběru hlavní a vedlejší kategorie, jsou vždy vybrány všechny druhy, některé můžete odstranit nebo všechny najednou smazat a přidat vlastní. Zboží je tříděno podle ceny za jednotku, aby bylo zřejmé, kde se dá pořídit nejlevněji.*')
+    st.text('*Děkuji za Vaše kometáře a zkušenosti, návrhy dalšího zboží, jiné třídění či uspořádání druhů.*')
     email = st.text_input('E-mail')
-    message = st.text_area('')
+    message = st.text_area('Text e-mailu')
     st.button('Odešli', on_click=my_callback) 
+def my_callback()
+with st.sidebar:
+    success = st.success('E-Mail odeslán !', icon="✅")
+    time.sleep(0.3)
+    success.empty()
+    
+with st.sidebar:
     link = '[kupi.cz](https://www.kupi.cz/) &nbsp;[akcniceny.cz](https://www.akcniceny.cz/) &nbsp;[iletaky.cz](https://www.iletaky.cz/) &nbsp;[akcniletaky.com](https://www.akcniletaky.com/)'
     st.markdown(link, unsafe_allow_html=True)    
 
