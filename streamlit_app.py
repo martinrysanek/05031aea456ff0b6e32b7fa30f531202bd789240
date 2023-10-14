@@ -108,7 +108,7 @@ with st.sidebar:
                 sys.exit()
 
             sent = st.success('E-mail odeslán')
-            time.sleep(0.2)
+            time.sleep(0.5)
             sent.empty()
         
     
