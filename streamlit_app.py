@@ -47,7 +47,6 @@ else:
 loading_text.empty()
 
 NADPISY = False
-BOTTOM = True
 RADKY = True
 
 # data.sort_values(by='Unit_num', ascending=True, inplace = True)
@@ -108,7 +107,9 @@ with st.sidebar:
                 st.error('Odeslání se nepovedlo.', e)
                 sys.exit()
 
-            st.success('E-mail odeslán')
+            sent = st.success('E-mail odeslán')
+            time.sleep(0.2)
+            sent.empty()
         
     
 with st.sidebar:
