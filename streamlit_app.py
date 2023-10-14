@@ -3,6 +3,9 @@ import requests
 import pandas as pd
 import io
 import time
+from email.mime.text import MIMEText
+import smtplib
+import sys
 
 # Configure Streamlit page layout for a wide style
 st.set_page_config(
@@ -80,8 +83,33 @@ with st.sidebar:
     st.write('Postup: *Po vyběru hlavní a vedlejší kategorie, jsou vždy vybrány všechny druhy, některé nebo všechny najednou můžete odstranit a nasledně vybrat vlastní. Zboží je tříděno podle Jednotkové ceny, aby bylo zřejmé, kde se dá pořídit nejlevněji.*')
     st.write('*Děkuji za Vaše kometáře a zkušenosti, návrhy dalšího zboží, jiné třídění či uspořádání druhů.*')
     email = st.text_input('E-mail')
-    message = st.text_area('Text e-mailu')
-    st.button('Odešli') 
+    content = st.text_area('Text e-mailu')
+    if st.button('Odešli'):
+        username = 'jiri.sladek.praha@gmail.com'
+        password = 'npynbtxdlynynuyc'  # Heslo pro aplikaci
+
+        # Aby email fungoval hezky česky
+        message = MIMEText(content)
+        message['Subject'] = 'Nová zpráva z streamlit.app'  
+        message['From'] = email
+        recipient = username
+
+        # Vytvoříme SMTP objekt se šifrováním pomocí TLS
+        with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+            smtp.starttls()  # Spustíme šifrované připojení
+            try:
+                smtp.login(username, password)
+            except Exception as e:
+                st.error('Přihlášení se nepovedlo.', e)
+                sys.exit()
+            try:
+                smtp.sendmail(username, recipient, message.as_string())
+            except Exception as e:
+                st.error('Odeslání se nepovedlo.', e)
+                sys.exit()
+
+            st.success('E-mail odeslán')
+        
     
 with st.sidebar:
     link = '[kupi.cz](https://www.kupi.cz/) &nbsp;[akcniceny.cz](https://www.akcniceny.cz/) &nbsp;[iletaky.cz](https://www.iletaky.cz/) &nbsp;[akcniletaky.com](https://www.akcniletaky.com/)'
