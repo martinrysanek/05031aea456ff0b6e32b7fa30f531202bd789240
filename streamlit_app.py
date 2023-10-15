@@ -52,21 +52,21 @@ RADKY = True
 # data.sort_values(by='Unit_num', ascending=True, inplace = True)
 if NADPISY:
     st.sidebar.header('Hlavní kategorie zboží')
-L1_selected = st.sidebar.selectbox('Vyber hlavní kategorii zboží', data['Kategorie'].unique())
+L1_selected = st.sidebar.selectbox('Vyber hlavní kategorii zboží', data['Kategorie'].unique(), help = 'Zační výběrem hlavní kategorie zboží.')
 if RADKY:
     st.sidebar.write("&nbsp;")
 filtered_data = data[data['Kategorie'] == L1_selected].sort_values(by='Podkategorie', ascending=True)
 
 if NADPISY:
     st.sidebar.header('Vedlejší kategorie zboží')
-L2_selected = st.sidebar.selectbox('Vyber vedlejší kategorii zboží', filtered_data['Podkategorie'].unique(), index=0)
+L2_selected = st.sidebar.selectbox('Vyber vedlejší kategorii zboží', filtered_data['Podkategorie'].unique(), index=0, help = 'Následuj výběrem vedlejší kategorie zboží, který zobrazí druhy.')
 if RADKY:
     st.sidebar.write("&nbsp;")
 filtered_data = filtered_data[filtered_data['Podkategorie'] == L2_selected].sort_values(by='Druh', ascending=True)
 
 if NADPISY:
     st.sidebar.header('Druh zboží')
-L3_selected = st.sidebar.multiselect('Vyber druh zboží', filtered_data['Druh'].unique(), default=filtered_data['Druh'].unique())
+L3_selected = st.sidebar.multiselect('Vyber druh zboží', filtered_data['Druh'].unique(), default=filtered_data['Druh'].unique(), help = 'Pro začátek jsou zobrazeny všechny druhy kategorií zboží. Vy vyberte ty druhy zboží, které Vás zajímají')
 
 # st.title('Tabulka zboží')
 st.write(f"**Hlavní kategorie**: *{L1_selected}* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + f"**Vedlejší kategorie**: *{L2_selected}* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + f"**Druh**: *{', '.join(L3_selected)}*")
@@ -75,11 +75,11 @@ st.write(f"**Hlavní kategorie**: *{L1_selected}* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 filtered_data = filtered_data[filtered_data['Druh'].isin(L3_selected)].sort_values(by='Unit_num', ascending=True)
 # selected_columns = ['Kategorie', 'Podkategorie', 'Druh', 'Název', 'Obchod', 'Cena', 'Cena za', 'Jednotková cena', 'Platnost']
 selected_columns = ['Druh', 'Název', 'Obchod', 'Cena', 'Cena za', 'Jednotková cena', 'Platnost']
-st.dataframe(filtered_data[selected_columns], hide_index=True, use_container_width=True, height=770)
+st.dataframe(filtered_data[selected_columns], hide_index=True, use_container_width=True, height=770, help = 'Pro výběr kategorií a druhů jsou uvedeny letákových zboží, která jsou tříděna podle Jednotkové ceny, aby bylo zřejmé, kde je k dispozici nejlevněji.')
 
 with st.sidebar:
     st.divider() 
-    st.write('Postup: *Po vyběru hlavní a vedlejší kategorie, jsou vždy vybrány všechny druhy, některé nebo všechny najednou můžete odstranit a nasledně vybrat vlastní. Zboží je tříděno podle Jednotkové ceny, aby bylo zřejmé, kde se dá pořídit nejlevněji.*')
+    # st.write('Postup: *Po vyběru hlavní a vedlejší kategorie, jsou vždy vybrány všechny druhy, některé nebo všechny najednou můžete odstranit a nasledně vybrat vlastní. Zboží je tříděno podle Jednotkové ceny, aby bylo zřejmé, kde se dá pořídit nejlevněji.*')
     st.write('*Děkuji za Vaše kometáře a zkušenosti, návrhy dalšího zboží, jiné třídění či uspořádání druhů.*')
     email = st.text_input('E-mail')
     content = st.text_area('Text e-mailu')
@@ -87,15 +87,13 @@ with st.sidebar:
         username = 'jiri.sladek.praha@gmail.com'
         password = 'npynbtxdlynynuyc'  # Heslo pro aplikaci
 
-        # Aby email fungoval hezky česky
         message = MIMEText(content)
         message['Subject'] = 'Nová zpráva z streamlit.app'  
         message['From'] = email
         recipient = username
 
-        # Vytvoříme SMTP objekt se šifrováním pomocí TLS
         with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
-            smtp.starttls()  # Spustíme šifrované připojení
+            smtp.starttls()  
             try:
                 smtp.login(username, password)
             except Exception as e:
