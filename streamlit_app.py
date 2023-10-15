@@ -3,9 +3,9 @@ import requests
 import pandas as pd
 import io
 import time
-from email.mime.text import MIMEText
-import smtplib
-import sys
+# from email.mime.text import MIMEText
+# import smtplib
+# import sys
 
 # Configure Streamlit page layout for a wide style
 st.set_page_config(
@@ -83,31 +83,31 @@ with st.sidebar:
     st.write('*Děkuji za Vaše kometáře a zkušenosti, návrhy dalšího zboží, jiné třídění či uspořádání druhů.*')
     email = st.text_input('E-mail')
     content = st.text_area('Text e-mailu')
-    if st.button('Odešli'):
-        username = 'jiri.sladek.praha@gmail.com'
-        password = 'npynbtxdlynynuyc'  # Heslo pro aplikaci
+    # if st.button('Odešli'):
+    #     username = 'jiri.sladek.praha@gmail.com'
+    #     password = 'npynbtxdlynynuyc'  # Heslo pro aplikaci
 
-        message = MIMEText(content)
-        message['Subject'] = 'Nová zpráva z streamlit.app'  
-        message['From'] = email
-        recipient = username
+    #     message = MIMEText(content)
+    #     message['Subject'] = 'Nová zpráva z streamlit.app'  
+    #     message['From'] = email
+    #     recipient = username
 
-        with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
-            smtp.starttls()  
-            try:
-                smtp.login(username, password)
-            except Exception as e:
-                st.error('Přihlášení se nepovedlo.', e)
-                sys.exit()
-            try:
-                smtp.sendmail(username, recipient, message.as_string())
-            except Exception as e:
-                st.error('Odeslání se nepovedlo.', e)
-                sys.exit()
+    #     with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
+    #         smtp.starttls()  
+    #         try:
+    #             smtp.login(username, password)
+    #         except Exception as e:
+    #             st.error('Přihlášení se nepovedlo.', e)
+    #             sys.exit()
+    #         try:
+    #             smtp.sendmail(username, recipient, message.as_string())
+    #         except Exception as e:
+    #             st.error('Odeslání se nepovedlo.', e)
+    #             sys.exit()
 
-            sent = st.success('E-mail odeslán')
-            time.sleep(0.5)
-            sent.empty()
+    #         sent = st.success('E-mail odeslán')
+    #         time.sleep(0.5)
+    #         sent.empty()
         
     
 with st.sidebar:
