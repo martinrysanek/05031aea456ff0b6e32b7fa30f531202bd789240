@@ -1,6 +1,5 @@
 requests
 pandas
 openpyxl
-email-to
 smtplib
 
