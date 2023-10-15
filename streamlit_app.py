@@ -59,14 +59,14 @@ filtered_data = data[data['Kategorie'] == L1_selected].sort_values(by='Podkatego
 
 if NADPISY:
     st.sidebar.header('Vedlejší kategorie zboží')
-L2_selected = st.sidebar.selectbox('Vyber vedlejší kategorii zboží', filtered_data['Podkategorie'].unique(), index=0, help = 'Následuj výběrem vedlejší kategorie zboží, který zobrazí druhy.')
+L2_selected = st.sidebar.selectbox('Vyber vedlejší kategorii zboží', filtered_data['Podkategorie'].unique(), index=0, help = 'Pokračuj výběrem vedlejší kategorie zboží, který zobrazí druhy.')
 if RADKY:
     st.sidebar.write("&nbsp;")
 filtered_data = filtered_data[filtered_data['Podkategorie'] == L2_selected].sort_values(by='Druh', ascending=True)
 
 if NADPISY:
     st.sidebar.header('Druh zboží')
-L3_selected = st.sidebar.multiselect('Vyber druh zboží', filtered_data['Druh'].unique(), default=filtered_data['Druh'].unique(), help = 'Pro začátek jsou zobrazeny všechny druhy kategorií zboží. Vy vyberte ty druhy zboží, které Vás zajímají')
+L3_selected = st.sidebar.multiselect('Vyber druh zboží', filtered_data['Druh'].unique(), default=filtered_data['Druh'].unique(), help = 'Nejprve jsou zobrazeny všechny druhy kategorií zboží. Vyberte ty druhy zboží, které Vás zajímají, ostatní smažte.')
 
 # st.title('Tabulka zboží')
 st.write(f"**Hlavní kategorie**: *{L1_selected}* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + f"**Vedlejší kategorie**: *{L2_selected}* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + f"**Druh**: *{', '.join(L3_selected)}*")
