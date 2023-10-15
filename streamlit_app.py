@@ -75,7 +75,8 @@ st.write(f"**Hlavní kategorie**: *{L1_selected}* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 filtered_data = filtered_data[filtered_data['Druh'].isin(L3_selected)].sort_values(by='Unit_num', ascending=True)
 # selected_columns = ['Kategorie', 'Podkategorie', 'Druh', 'Název', 'Obchod', 'Cena', 'Cena za', 'Jednotková cena', 'Platnost']
 selected_columns = ['Druh', 'Název', 'Obchod', 'Cena', 'Cena za', 'Jednotková cena', 'Platnost']
-st.dataframe(filtered_data[selected_columns], hide_index=True, use_container_width=True, height=770, help = 'Pro výběr kategorií a druhů jsou uvedeny letákových zboží, která jsou tříděna podle Jednotkové ceny, aby bylo zřejmé, kde je k dispozici nejlevněji.')
+st.dataframe(filtered_data[selected_columns], hide_index=True, use_container_width=True, height=770)
+# , help = 'Pro výběr kategorií a druhů jsou uvedeny letákových zboží, která jsou tříděna podle Jednotkové ceny, aby bylo zřejmé, kde je k dispozici nejlevněji.'
 
 with st.sidebar:
     st.divider() 
