@@ -134,7 +134,6 @@ if st.session_state.MODE == 0:
     filtered_data = filtered_data[filtered_data["Druh"].isin(L3_selected)].sort_values(
         by="Unit_num", ascending=True
     )
-    # selected_columns = ['Druh', 'Název', 'Obchod', 'Cena', 'Cena za', 'Jednotková cena', 'Platnost']
     selected_columns = [
         "Druh",
         "Název",
@@ -142,6 +141,7 @@ if st.session_state.MODE == 0:
         "Price_num",
         "Cena za",
         "Unit_num",
+        "Unit_amount",
         "Platnost"
     ]
     # print (filtered_data[selected_columns].columns)
@@ -189,6 +189,12 @@ if st.session_state.MODE == 0:
                 step=0.01,
                 format="%.2f Kč",
                 disabled=True                
+            ),
+            "Unit_amount": st.column_config.TextColumn(
+                "Množství za jednotku",
+                help="Množství za jednotku",
+                disabled=True,
+                max_chars=100,
             ),
             "Platnost": st.column_config.TextColumn(
                 "Platnost",
