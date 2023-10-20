@@ -45,7 +45,7 @@ def load_data(excel_file_url):
     return requests.get(excel_file_url)
 
 def make_pretty(styler):
-    styler.background_gradient(axis=1, cmap="BuGn_r")
+    styler.background_gradient(axis=1, cmap="Greens")
     return styler
 
 # Display the dataframe with the custom CSS style
