@@ -4,5 +4,5 @@ openpyxl==3.1.2
 email-to
 secure-smtplib
 streamlit-js-eval
-pickle
+pickle5
 
