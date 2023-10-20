@@ -315,7 +315,7 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
         
             df_obchody.reset_index(inplace=True)      
             df_obchody['index'] = df_obchody['index'].apply(str)
-            df_obchody = df_obchody.style.pipe(make_pretty)    
+# df_obchody = df_obchody.style.pipe(make_pretty)    
             df_config['index'] = st.column_config.TextColumn(
                                             "Výběr kategorií",
                                             help="Číslo výběru kategorií",
