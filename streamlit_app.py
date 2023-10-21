@@ -284,6 +284,7 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
         selection[index][4] = value
     st.session_state.selection = pickle.dumps(selection)
 
+    compare = st.radio("Vyber co porovnáváme", ["cena prodávaného zboží","jednotková cena zboží"], horizontal = True)
     set_obchody = set(data["Obchod"].unique())
     # for row in selection:
         # filtered_data = data[
@@ -311,7 +312,10 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
                 if vyber.empty:
                     value = MAX_VALUE
                 else:
-                    value = vyber["Price_num"].min() * row[4]    
+                    if compare == "cena prodávaného zboží":
+                        value = vyber["Price_num"].min() * row[4]    
+                    else:
+                        value = vyber["Unit_num"].min() * row[4]    
                 if values == None:
                     values = [value]
                 else:
@@ -359,11 +363,11 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
                             hide_index=True,
                             use_container_width=True
                             )
-            st.markdown('*Cena 9999.00 Kč u obchodu znamená, že daný obchod nem8 vybrané zboží v akci podle letáků. Obchody jsou tříděny zleva od nejlevnějšího k nejdražšímu.*')
+            st.markdown('*Cena 9999.00 Kč ve sloupci u obchodu znamená, že daný obchod nemá pro danou kategorii žádné zboží podle letáků zrovna v akci. Obchody jsou tříděny zleva od nejlevnějšího k nejdražšímu.*')
         else:
-            st.header("Není obchod, který má nabídky pro všechny kategorie. Začněte od začátku.")
+            st.header("Není zde ani jeden obchod, který má nabídky pro všechny kategorie. Začněte prosím od začátku.")
     else:
-        st.header("Není obchod, který má nabídky pro všechny kategorie. Začněte od začátku.")
+        st.header("Není zde ani jeden obchod, který má nabídky pro všechny kategorie. Začněte prosím od začátku.")
       
     st.write("")
     if st.button("Smazat výběr kategorií"):
