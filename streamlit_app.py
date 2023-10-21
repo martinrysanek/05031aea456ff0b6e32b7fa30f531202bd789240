@@ -8,9 +8,10 @@ import smtplib
 import sys
 import pickle
 from streamlit_js_eval import streamlit_js_eval
+import locale
 
 NADPISY = False
-RADKY = True
+RADKY = False
 min_val= {}
 
 if "MODE" not in st.session_state:
@@ -20,6 +21,10 @@ if "selection" not in st.session_state:
     st.session_state.selection = pickle.dumps(selection)
 if "num_rows" not in st.session_state:
     st.session_state.num_rows = 0
+if "L4_selected" not in st.session_state:
+    st.session_state.L4_selected = ""
+
+locale.setlocale(locale.LC_ALL, "cs_CZ.UTF-8")
 
 # Configure Streamlit page layout for a wide style
 st.set_page_config(
@@ -37,8 +42,6 @@ section[data-testid="stSidebar"] {
     width: 400px !important; # Set the width to your desired value
 }
 """
-
-# dvn-scroller glideDataEditor
 
 @st.cache_data(ttl=900)
 def load_data(excel_file_url):
@@ -70,12 +73,20 @@ else:
 
 loading_text.empty()
 
+def on_L1_change():
+    st.session_state.L4_selected = ""
+    
+    
+def on_L2_change():
+    st.session_state.L4_selected = ""
+
 if NADPISY:
     st.sidebar.header("Hlavní kategorie zboží")
 L1_selected = st.sidebar.selectbox(
     "Vyber hlavní kategorii zboží",
     data["Kategorie"].unique(),
     help="Začněte výběrem hlavní kategorie zboží.",
+    on_change=on_L1_change
 )
 if RADKY:
     st.sidebar.write("&nbsp;")
@@ -90,6 +101,7 @@ L2_selected = st.sidebar.selectbox(
     filtered_data["Podkategorie"].unique(),
     index=0,
     help="Pokračujte výběrem vedlejší kategorie zboží, který zobrazí druhy.",
+    on_change=on_L2_change
 )
 if RADKY:
     st.sidebar.write("&nbsp;")
@@ -106,11 +118,10 @@ L3_selected = st.sidebar.multiselect(
     help="Nejprve jsou zobrazeny všechny druhy kategorií zboží k daným kategoriím. Vyberte ty druhy zboží, které Vás zajímají, ostatní postupně smažte nebo smažte všechny najednou a začněte prvním druhem.",
 )
 
-
-def display_button(cell, button_label):
-    button = st.sidebar.button(button_label)
-    cell.button(button)
-
+st.sidebar.write("&nbsp;")
+L4_selected = st.sidebar.text_input("Upřesni název zboží", value = "", max_chars=20, placeholder="upřesni název, může zůstat nevyplněný ...", help="Upřesněte název zboží, tento údaj může zůstat nevyplněný", key="L4_selected")
+# st.sidebar.info(f"L4: {L4_selected}")
+# st.sidebar.info(f"st.session_state.L4: {st.session_state.L4_selected}")
 
 if st.sidebar.button("Vložit vybrané kategorie do porovnání"):
     new_row = [L1_selected, L2_selected, L3_selected, 1]
@@ -125,15 +136,17 @@ if st.sidebar.button("Přepnout mód porovnání"):
 if st.session_state.MODE == 0:
     # st.title('Tabulka zboží')
     st.write(
-        f"**Hlavní kategorie**: *{L1_selected}* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-        + f"**Vedlejší kategorie**: *{L2_selected}* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-        + f"**Druh**: *{', '.join(L3_selected)}*"
+        f"**Hlavní kategorie**: *{L1_selected}* &nbsp;&nbsp;&nbsp;"
+        + f"**Vedlejší kategorie**: *{L2_selected}* &nbsp;&nbsp;&nbsp;"
+        + f"**Druh**: *{', '.join(L3_selected)}* &nbsp;&nbsp;&nbsp;" + f"**Upřesnění**: \"{L4_selected}\""
     )
 
-    # Filter the data
     filtered_data = filtered_data[filtered_data["Druh"].isin(L3_selected)].sort_values(
         by="Unit_num", ascending=True
     )
+    if L4_selected != "":
+        filtered_data = filtered_data[filtered_data["Název"].str.contains(L4_selected)]
+        
     selected_columns = [
         "Druh",
         "Název",
@@ -345,13 +358,14 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
         streamlit_js_eval(js_expressions="parent.window.location.reload()")
 
 with st.sidebar:
-    st.divider()
+    # st.divider()
+    st.sidebar.write("")
     # st.write('Postup: *Po vyběru hlavní a vedlejší kategorie, jsou vždy vybrány všechny druhy, některé nebo všechny najednou můžete odstranit a nasledně vybrat vlastní. Zboží je tříděno podle Jednotkové ceny, aby bylo zřejmé, kde se dá pořídit nejlevněji.*')
     st.write(
         "*Děkuji za Vaše kometáře a zkušenosti, návrhy dalšího zboží, jiné třídění či uspořádání druhů.*"
     )
-    email = st.text_input("E-mail")
-    content = st.text_area("Text e-mailu")
+    email = st.text_input("E-mail", placeholder="Váše e-mail adresa ...")
+    content = st.text_area("Text e-mailu", placeholder="napište sdělení do e-mailu ...")
     if st.button("Odešli"):
         username = "jiri.sladek.praha@gmail.com"
         password = "npynbtxdlynynuyc"  # Heslo pro aplikaci
