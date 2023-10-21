@@ -306,34 +306,33 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
                     & (data["Kategorie"] == row[0])
                     & (data["Podkategorie"] == row[1])
                     & data["Druh"].isin(row[2])]
-                if not vyber.empty:
-                    if row[3] != "":
-                        value = vyber[vyber["Název"].str.contains(row[3])]["Price_num"].min() * row[4]    
-                    else:
-                        value = vyber["Price_num"].min() * row[4]    
-                else:
+                if not vyber.empty and row[3] != "":
+                    vyber = vyber[vyber["Název"].str.contains(row[3])]
+                if vyber.empty:
                     value = MAX_VALUE
-                
+                else:
+                    value = vyber["Price_num"].min() * row[4]    
                 if values == None:
                     values = [value]
                 else:
                     values.append(value)
+            # print (obchod, values)
             new_df = pd.DataFrame({obchod: values})
             if df_obchody.empty:
                 df_obchody = new_df
             else:
                 df_obchody = pd.concat([df_obchody, new_df], axis=1)
-                
+
         len_obchody = len(df_obchody.index) - 1
-        df_obchody = df_obchody.iloc[:, :8]
+        
 
         if len_obchody >= 0:
             df_obchody.loc[len(df_obchody.index)] = df_obchody.sum()
             df_obchody = df_obchody.rename(index={(len(df_obchody)-1): 'Součet'})
             last_row = df_obchody.iloc[-1]
             df_obchody = df_obchody[last_row.sort_values(ascending=True).index]
-            # df_obchody = df_obchody.loc[:, df_obchody.loc[len_obchody].sort_values().index]
-    
+            df_obchody = df_obchody.iloc[:, :8]
+                
             st.header("Obchody a ceny za vybrané kategorie")
             df_config = {}
             for column in df_obchody.columns:
@@ -360,7 +359,7 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
                             hide_index=True,
                             use_container_width=True
                             )
-            st.markdown('*Cena 9999.00 Kč u obchodu znamená, že daný obchod dané zboží nemá v akci podle letáků. Jinak jsou obchody zleva tříděny od nejlevnějšího k nejdražšímu.*')
+            st.markdown('*Cena 9999.00 Kč u obchodu znamená, že daný obchod nem8 vybrané zboží v akci podle letáků. Obchody jsou tříděny zleva od nejlevnějšího k nejdražšímu.*')
         else:
             st.header("Není obchod, který má nabídky pro všechny kategorie. Začněte od začátku.")
     else:
