@@ -11,7 +11,8 @@ from streamlit_js_eval import streamlit_js_eval
 
 NADPISY = False
 RADKY = False
-min_val= {}
+# min_val= {}
+MAX_VALUE = 9999
 
 if "MODE" not in st.session_state:
     st.session_state.MODE = 0
@@ -123,7 +124,7 @@ L4_selected = st.sidebar.text_input("Upřesni název zboží", value = "", max_c
 # st.sidebar.info(f"st.session_state.L4: {st.session_state.L4_selected}")
 
 if st.sidebar.button("Vložit vybrané kategorie do porovnání"):
-    new_row = [L1_selected, L2_selected, L3_selected, 1]
+    new_row = [L1_selected, L2_selected, L3_selected, L4_selected, 1]
     selection = pickle.loads(st.session_state.selection)
     selection.append(new_row)
     st.session_state.selection = pickle.dumps(selection)
@@ -232,7 +233,8 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
             "Hlavní kategorie",
             "Vedlejší kategorie",
             "Druh",
-            "Relativní zastoupení",
+            "Upřesnění",
+            "Relativní zastoupení"
         ],
     )
     df.reset_index(inplace=True)     
@@ -245,7 +247,7 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
             "Relativní zastoupení": st.column_config.SelectboxColumn(
                 "Relativní zastoupení",
                 help="Relativní zastoupení",
-                options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                options=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
                 required=True,
             ),
             "Hlavní kategorie": st.column_config.TextColumn(
@@ -265,6 +267,11 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
                                     help="Číslo výběru kategorií",
                                     disabled=True
             ),
+            "Upřesnění": st.column_config.TextColumn(
+                                    "Upřesnění",
+                                    help="Upřesnění názvu zboží",
+                                    disabled=True
+            ),
             "Druh": st.column_config.ListColumn("Druhy", help="Seznam vybraných druhů k daným kategoriím")
         },
         hide_index=True,
@@ -274,17 +281,19 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
     
     for index, row in edited_df.iterrows():
         value = row["Relativní zastoupení"]
-        selection[index][3] = value
+        selection[index][4] = value
     st.session_state.selection = pickle.dumps(selection)
 
     set_obchody = set(data["Obchod"].unique())
-    for row in selection:
-        filtered_data = data[
-            (data["Kategorie"] == row[0])
-            & (data["Podkategorie"] == row[1])
-            & data["Druh"].isin(row[2])
-        ]
-        set_obchody = set_obchody.intersection(set(filtered_data["Obchod"].unique()))
+    # for row in selection:
+        # filtered_data = data[
+        #     (data["Kategorie"] == row[0])
+        #     & (data["Podkategorie"] == row[1])
+        #     & data["Druh"].isin(row[2])
+        # ]
+        # if row[3] != "":
+        #     filtered_data = filtered_data[filtered_data["Název"].str.contains(row[3])]
+        # set_obchody = set_obchody.intersection(set(filtered_data["Obchod"].unique()))
 
     if len(set_obchody) > 0:
 
@@ -292,12 +301,19 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
         for obchod in set_obchody:
             values = None
             for row in selection:
-                value = data[
+                vyber = data[
                     (data["Obchod"] == obchod)
                     & (data["Kategorie"] == row[0])
                     & (data["Podkategorie"] == row[1])
-                    & data["Druh"].isin(row[2])
-                ]["Price_num"].min() * row[3]
+                    & data["Druh"].isin(row[2])]
+                if not vyber.empty:
+                    if row[3] != "":
+                        value = vyber[vyber["Název"].str.contains(row[3])]["Price_num"].min() * row[4]    
+                    else:
+                        value = vyber["Price_num"].min() * row[4]    
+                else:
+                    value = MAX_VALUE
+                
                 if values == None:
                     values = [value]
                 else:
@@ -309,7 +325,7 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
                 df_obchody = pd.concat([df_obchody, new_df], axis=1)
                 
         len_obchody = len(df_obchody.index) - 1
-        
+        df_obchody = df_obchody.iloc[:, :8]
 
         if len_obchody >= 0:
             df_obchody.loc[len(df_obchody.index)] = df_obchody.sum()
@@ -344,11 +360,13 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
                             hide_index=True,
                             use_container_width=True
                             )
+            st.markdown('*Cena 9999.00 Kč u obchodu znamená, že daný obchod dané zboží nemá v akci podle letáků. Jinak jsou obchody zleva tříděny od nejlevnějšího k nejdražšímu.*')
         else:
             st.header("Není obchod, který má nabídky pro všechny kategorie. Začněte od začátku.")
     else:
         st.header("Není obchod, který má nabídky pro všechny kategorie. Začněte od začátku.")
-        
+      
+    st.write("")
     if st.button("Smazat výběr kategorií"):
         selection = []
         st.session_state.selection = pickle.dumps(selection)
