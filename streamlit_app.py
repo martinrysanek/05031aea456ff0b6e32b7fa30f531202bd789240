@@ -84,7 +84,7 @@ if NADPISY:
     st.sidebar.header("Hlavní kategorie zboží")
 L1_selected = st.sidebar.selectbox(
     "Vyber hlavní kategorii zboží",
-    data["Kategorie"].unique().sort_values(ascending=True),
+    sorted(data["Kategorie"].unique()),
     help="Začněte výběrem hlavní kategorie zboží.",
     on_change=on_L1_change
 )
