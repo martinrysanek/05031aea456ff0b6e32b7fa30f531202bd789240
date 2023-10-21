@@ -115,7 +115,7 @@ L3_selected = st.sidebar.multiselect(
     "Vyber druh zboží",
     filtered_data["Druh"].unique(),
     default=filtered_data.iloc[0]["Druh"],
-    help="Nejprve jsou zobrazeny všechny druhy kategorií zboží k daným kategoriím. Vyberte ty druhy zboží, které Vás zajímají, ostatní postupně smažte nebo smažte všechny najednou a začněte prvním druhem.",
+    help="Nejprve je vybrán jediný druhy kategorií zboží. Vy vyberte ty druhy, které Vás zajímají. Všechny druhy můžete smazat křížkem v kolečku.",
 )
 
 st.sidebar.write("&nbsp;")
