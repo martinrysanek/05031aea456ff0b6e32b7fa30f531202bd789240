@@ -82,10 +82,10 @@ def on_L2_change():
 
 if NADPISY:
     st.sidebar.header("Hlavní kategorie zboží")
-categories_L1 = data["Kategorie"].unique().sort_values(by="Kategorie")
+categories_L1 = data["Kategorie"].unique()
 L1_selected = st.sidebar.selectbox(
     "Vyber hlavní kategorii zboží",
-    categories_L1,
+    categories_L1.sort_values("Kategorie"),
     help="Začněte výběrem hlavní kategorie zboží.",
     on_change=on_L1_change
 )
