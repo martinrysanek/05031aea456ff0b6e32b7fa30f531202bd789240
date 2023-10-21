@@ -8,7 +8,6 @@ import smtplib
 import sys
 import pickle
 from streamlit_js_eval import streamlit_js_eval
-import locale
 
 NADPISY = False
 RADKY = False
@@ -24,7 +23,7 @@ if "num_rows" not in st.session_state:
 if "L4_selected" not in st.session_state:
     st.session_state.L4_selected = ""
 
-locale.setlocale(locale.LC_ALL, "cs_CZ.UTF-8")
+# locale.setlocale(locale.LC_ALL, "cs_CZ.UTF-8")
 
 # Configure Streamlit page layout for a wide style
 st.set_page_config(
