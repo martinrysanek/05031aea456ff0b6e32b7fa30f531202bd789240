@@ -284,8 +284,7 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
         value = row["Relativní zastoupení"]
         selection[index][4] = value
     st.session_state.selection = pickle.dumps(selection)
-
-    compare = st.radio("Vyber co porovnáváme", ["cena prodávaného zboží","jednotková cena zboží"], horizontal = True)
+    
     set_obchody = set(data["Obchod"].unique())
     # for row in selection:
         # filtered_data = data[
@@ -298,6 +297,8 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
         # set_obchody = set_obchody.intersection(set(filtered_data["Obchod"].unique()))
 
     if len(set_obchody) > 0:
+        st.header("Obchody a ceny za vybrané kategorie")
+        compare = st.radio("Vyber co porovnáváme", ["cena prodávaného zboží","jednotková cena zboží"], horizontal = True)
 
         df_obchody = pd.DataFrame()
         for obchod in set_obchody:
@@ -338,7 +339,7 @@ elif st.session_state.MODE == 1 and "selection" in st.session_state and st.sessi
             df_obchody = df_obchody[last_row.sort_values(ascending=True).index]
             df_obchody = df_obchody.iloc[:, :8]
                 
-            st.header("Obchody a ceny za vybrané kategorie")
+
             df_config = {}
             for column in df_obchody.columns:
                 df_config[column] = st.column_config.NumberColumn(
