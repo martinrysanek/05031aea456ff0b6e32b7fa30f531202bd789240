@@ -287,8 +287,8 @@
          }
       }
    },
-   "Stock exchange news (SLO)":{
-      "name":"Stock exchange news (SLO)",
+   "Business News (SLO)":{
+      "name":"Business News (SLO)",
       "language":"SLO",
       "buttonName":"Povzetek",
       "inputs":[
