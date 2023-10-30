@@ -94,7 +94,7 @@
                      "min_new_tokens":5,
                      "max_new_tokens":80
                   }
-               },               
+               },
                {
                   "google/flan-ul2":{
                      "decoding_method":"greedy",
@@ -105,7 +105,7 @@
                      "min_new_tokens":5,
                      "max_new_tokens":80
                   }
-               }               
+               }
             ],
             "instruction":{
                "detailed":"Následující dokument je přepisem hovoru o finančních výsledcích.  Přečtěte si dokument a poté napište výhradně v českém jazyce všechny nalezené entity v daném dokumentu.",
@@ -246,17 +246,17 @@
          "Konferenční hovor po výsledcích za 3Q23 naznačil zajímavou dividendu nad odhadovaných 7,5 Kč. Moneta zvýšila svůj výhled čistého zisku pro rok 2023 s výsledky za třetí kvartál 2023 na 5,0 mld. Kč z předchozích nejméně 4,7 mld. Kč. Management uvedl, že střednědobý výhled se reviduje a aktualizace bude vydána s prezentací celoročních výsledků. Zatímco výhled provozního zisku na rok 2024 by mohl být upraven níže, výhled čistého zisku ve výši minimálně 4,8 mld. Kč by měl zůstat nezměněn. Moneta se bude snažit pokles úrokových výnosů z titulu zrušení úročení minimálních rezerv ČNB kompenzovat silnějším a výnosnějším růstem vkladů, ale i úvěrů. Možností je i snížení nákladů management vidí prostor v roce 2024 pro cca ~100 mil. Kč) a pomoci by mohly i nižší než dříve předpokládané rizikové náklady.  Nedávné snížení požadavku SREP na rok 2024 a předchozí snížení proticyklické kapitálové rezervy zvýšilo přebytečný kapitál očekávaný pro rok 2023. Management uvedl, že zváží různé možnosti pro přebytečný kapitál. Podle našeho názoru lze tedy očekávat atraktivní dividendu za rok 2023, potenciálně nad naším odhadem 7,5 Kč/akcii( cca 8,6% hrubý výnos).",
          "Intel svými výsledky za 3Q překročil očekávání analytiků. EPS dosáhlo 0,41 USD (očekávání bylo 0,22 USD). Tržby byly ve výši 14,16 mld. USD oproti odhadu, jež činil 13,6 mld. USD. Nejvyšší část tržeb představoval segment výpočetní techniky zahrnující hlavně stolní počítače a notebooky s 7,9 mld. USD (-3,2 % r/r, nicméně +16 % q/q). Daný segment se dle managementu již pravděpodobně odrazil od svého minima v 1Q23. Avšak relativním zklamáním byl segment datových center a AI s 3,8 mld. USD (-10,4 % r/r a -4,7 % q/q). Slibný růst tržeb předvedl segment výroby čipů pro jiné společnosti s 311 mil. USD (+300 % r/r) a dle managementu splnil jeho očekávání. Tržby Mobileye dosáhly 530 mil. USD (oproti 450 mil. USD v 3Q22), což jen utvrzuje potenciál dané firmy, ve které má Intel majoritní podíl. Pro 4Q CEO Pat Gelsinger zvedl odhad tržeb na 14,6 – 15,6 mld. USD oproti původnímu odhadu 14,34 mld. USD a zisk na akcii očekává okolo 0,44 USD. Akcie po uzavření trhu reagovaly skokem o 7,8 %.",
          "Ruská centrální banka v pátek zvýšila svou základní úrokovou sazbu o dva procentní body na 15 procent. Pokračujícím zpřísňováním měnové politiky reaguje na slabý kurz domácí měny a vzestup inflačních tlaků. Většina analytiků v anketě agentury Reuters předpovídala, že banka základní sazbu zvýší pouze o jeden procentní bod. Banka rovněž zlepšila odhad letošního růstu ruské ekonomiky. Ruský rubl se po zprávě o překvapivě výrazném zvýšení úroků vyšplhal až na šestitýdenní maximum vůči dolaru, později však o část zisků přišel. Dolar vůči rublu sestoupil až na zhruba 92,5 RUB/USD, nejníže od 12. září. Krátce po 16:00 SELČ se nicméně pohyboval v blízkosti 93,6 RUB/USD, oproti čtvrtku tak ztrácel pouze 0,4 procenta, napsala agentura Reuters."
-        ],
+      ],
       "topics":{
          "topic1":{
             "topicName":"Document summary",
             "models":[
                {
                   "meta-llama/llama-2-70b-chat":{
-                      "decoding_method": "greedy",
-                      "repetition_penalty": 1.2,
-                      "min_new_tokens": 20,
-                      "max_new_tokens": 200
+                     "decoding_method":"greedy",
+                     "repetition_penalty":1.2,
+                     "min_new_tokens":20,
+                     "max_new_tokens":200
                   }
                },
                {
@@ -294,17 +294,17 @@
       "inputs":[
          "Intel je z rezultati za tretje četrtletje presegel pričakovanja analitikov. Dobiček na dobiček je znašal 0,41 USD (pričakovanja so bila 0,22 USD). Prihodki so znašali 14,16 milijarde USD, medtem ko je bila ocena 13,6 milijarde USD. Največji del prodaje je predstavljal računalniški segment, ki vključuje predvsem namizne in prenosne računalnike, in sicer 7,9 milijarde USD (-3,2 % medletno, vendar +16 % četrtletno). Segment podatkovnih centrov in umetne inteligence pa je bil relativno razočaranje s 3,8 milijarde USD (-10,4 % medletno in -4,7 % četrtletno). Segment proizvodnje čipov za druga podjetja je pokazal obetavno rast prodaje s 311 milijoni USD. Po navedbah vodstva je uspešnost podjetja izpolnila njegova pričakovanja. Prodaja podjetja Mobileye je dosegla 530 milijonov EUR. To le še potrjuje potencial podjetja, v katerem ima Intel večinski delež. Glavni izvršni direktor Pat Gelsinger je za četrto četrtletje zvišal oceno prihodkov na 14,6-15,6 milijarde USD v primerjavi s prvotno oceno 14,34 milijarde USD in pričakuje, da bo dobiček na delnico znašal približno 0,44 USD. Po zaprtju trga so delnice poskočile za 7,8 %.",
          "Ruska centralna banka je v petek zvišala ključno obrestno mero za dve odstotni točki na 15 odstotkov. Zaradi šibke domače valute in vse večjih inflacijskih pritiskov še naprej zaostruje denarno politiko. Večina analitikov v anketi agencije Reuters je napovedovala, da bo banka osnovno obrestno mero zvišala le za eno odstotno točko. Banka je prav tako izboljšala oceno ruske gospodarske rasti v letošnjem letu. Ruski rubelj se je ob novici o presenetljivo velikem zvišanju obrestne mere povzpel na šesttedensko najvišjo vrednost v primerjavi z dolarjem, vendar je pozneje izgubil del svojih dobičkov. V primerjavi z rubljem se je tečaj dolarja znižal na približno 92,5 RUB/USD, kar je najnižja vrednost po 12. septembru. Kmalu po 16. uri po srednjeevropskem času pa se je približal vrednosti 93,6 RUB/USD in tako od četrtka izgubil le 0,4 odstotka, poroča Reuters."
-        ],
+      ],
       "topics":{
          "topic1":{
             "topicName":"Document summary",
             "models":[
                {
                   "meta-llama/llama-2-70b-chat":{
-                      "decoding_method": "greedy",
-                      "repetition_penalty": 1.2,
-                      "min_new_tokens": 20,
-                      "max_new_tokens": 200
+                     "decoding_method":"greedy",
+                     "repetition_penalty":1.2,
+                     "min_new_tokens":20,
+                     "max_new_tokens":200
                   }
                },
                {
@@ -341,17 +341,17 @@
       "buttonName":"Shrnutí",
       "inputs":[
          "Obchodník: Dobrý den. Chtěl bych s vámi dnes projednat náš dlouhodobý obchodní vztah. Jak jste byl spokojen s naší dosavadní spoluprací?\n   Partner: Spolupráce s vaší firmou byla dosud velmi uspokojivá. Jsme spokojeni s kvalitou vašich produktů a vaší podporou. Myslím si, že jsme dosáhli významného pokroku.\n   Obchodník: To je skvělé slyšet. Rádi bychom pokračovali v tomto vzájemně prospěšném vztahu. Máme některé nové produkty a služby, které by se vám mohly líbit. Chtěli bychom s vámi diskutovat o možnosti rozšíření naší spolupráce a zvážit, jak bychom mohli lépe vyhovět vašim potřebám.\n   Partner: To zní zajímavě. Rádi bychom se dozvěděli více o těchto nových produktech a službách. Máme některé nové projekty, na kterých pracujeme, a myslím si, že by vaše řešení mohla být pro nás užitečná. Můžete nám poskytnout podrobnější informace?\n   Obchodník: Určitě, rádi bychom vám představili naše novinky a zvážili, jak by mohly být přizpůsobeny vašim projektům. Také bychom rádi projednali podmínky spolupráce a cenovou strukturu. Máte nějaký konkrétní časový plán, kdy byste chtěli tyto nové produkty zavést?\n   Partner: Budeme se potřebovat interně poradit ohledně našeho plánu, ale myslím si, že bychom mohli být připraveni začít spolupracovat během několika měsíců. Rádi bychom se dozvěděli více o cenách a podmínkách. Mohli byste nám připravit nějakou nabídku?\n   Obchodník: Samozřejmě, rádi vám připravíme podrobnou nabídku a provedeme vás celým procesem. Myslím si, že máme velký potenciál v tomto obchodním vztahu. Děkuji za váš čas a těším se na další spolupráci."
-        ],
+      ],
       "topics":{
          "topic1":{
             "topicName":"Business talk summary",
             "models":[
                {
                   "meta-llama/llama-2-70b-chat":{
-                      "decoding_method": "greedy",
-                      "repetition_penalty": 1.2,
-                      "min_new_tokens": 20,
-                      "max_new_tokens": 200
+                     "decoding_method":"greedy",
+                     "repetition_penalty":1.2,
+                     "min_new_tokens":20,
+                     "max_new_tokens":200
                   }
                },
                {
@@ -892,5 +892,5 @@
             "enabled":true
          }
       }
-   }   
+   }
 }
